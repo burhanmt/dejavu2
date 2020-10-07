@@ -12,6 +12,7 @@ use Tests\TestCase;
 class DejavuL1LanguagesTest extends TestCase
 {
     use DatabaseMigrations;
+
     public const ENDPOINT = '/api/v1/dejavu-l1-languages/';
 
     /**
@@ -20,7 +21,7 @@ class DejavuL1LanguagesTest extends TestCase
     public function testOneRecordAsResource()
     {
         $dejavu_l1_language = DejavuL1Language::factory()->make();
-        $user               = User::factory()->make();
+        $user = User::factory()->make();
         Passport::actingAs($user);
         $this->getJson(self::ENDPOINT . '1', [
             'accept' => 'application/vnd.api+json',
@@ -29,11 +30,11 @@ class DejavuL1LanguagesTest extends TestCase
              ->assertJson(
                  [
                      "data" => [
-                         "id"         => '1',
-                         "type"       => 'DejavuL1Languages',
+                         "id" => '1',
+                         "type" => DejavuL1Language::typeNameConvention(),
                          "attributes" => [
-                             "name"                       => $dejavu_l1_language->name,
-                             "short_name"                 => $dejavu_l1_language->short_name,
+                             "name" => $dejavu_l1_language->name,
+                             "short_name" => $dejavu_l1_language->short_name,
                              "interface_language_support" => $dejavu_l1_language->interface_language_support,
                          ]
                      ]
@@ -64,7 +65,7 @@ class DejavuL1LanguagesTest extends TestCase
         Passport::actingAs($user);
         $this->postJson(self::ENDPOINT, [
             'data' => [
-                'type' => 'DejavuL1Languages',
+                'type' => DejavuL1Language::typeNameConvention(),
                 'attributes' => [
                     'name' => 'Spanish',
                     'short_name' => 'SP',
@@ -79,7 +80,7 @@ class DejavuL1LanguagesTest extends TestCase
                 [
                     'data' => [
                         'id' => '3',
-                        'type' => 'DejavuL1Languages',
+                        'type' => DejavuL1Language::typeNameConvention(),
                         'attributes' => [
                             'name' => 'Spanish',
                             'short_name' => 'SP',
@@ -109,7 +110,7 @@ class DejavuL1LanguagesTest extends TestCase
         $this->patchJson(self::ENDPOINT . '1', [
             'data' => [
                 'id' =>  '1',
-                'type' => 'DejavuL1Languages',
+                'type' => DejavuL1Language::typeNameConvention(),
                 'attributes' => [
                     'name' => 'English-Muck'
                 ]
@@ -122,7 +123,7 @@ class DejavuL1LanguagesTest extends TestCase
                 [
                     'data' => [
                         'id' => '1',
-                        'type' => 'DejavuL1Languages',
+                        'type' => DejavuL1Language::typeNameConvention(),
                         'attributes' => [
                             'name' => 'English-Muck',
                             'short_name' => 'EN',
@@ -160,13 +161,16 @@ class DejavuL1LanguagesTest extends TestCase
         ]);
     }
 
+    /**
+     *
+     */
     public function testStoreValidation()
     {
         $user = User::factory()->make();
         Passport::actingAs($user);
         $this->postJson(self::ENDPOINT, [
             'data' => [
-                'type' => 'DejavuL1Languages',
+                'type' => DejavuL1Language::typeNameConvention(),
                 'attributes' => [
                     'name' => 'Spanish',
                     'short_name' => 'SPAAA', // Max: 3 but we put more than 3 for test purpose

@@ -3,25 +3,25 @@
 
 namespace Tests\Feature;
 
-use App\Models\DejavuL2Language;
+use App\Models\TrustLevel;
 use App\Models\User;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-class DejavuL2LanguagesTest extends TestCase
+class TrustLevelsTest extends TestCase
 {
     use DatabaseMigrations;
 
-    public const ENDPOINT = '/api/v1/dejavu-l2-languages/';
+    public const ENDPOINT = '/api/v1/trust-levels/';
 
     /**
      *
      */
     public function testOneRecordAsResource()
     {
-        $dejavu_l2_language = DejavuL2Language::factory()->make();
-        $user               = User::factory()->make();
+        $trust_levels = TrustLevel::factory()->make();
+        $user = User::factory()->make();
         Passport::actingAs($user);
         $this->getJson(self::ENDPOINT . '1', [
             'accept' => 'application/vnd.api+json',
@@ -30,11 +30,10 @@ class DejavuL2LanguagesTest extends TestCase
              ->assertJson(
                  [
                      "data" => [
-                         "id" => '1',
-                         "type" => DejavuL2Language::typeNameConvention(),
+                         "id"         => '1',
+                         "type"       => TrustLevel::typeNameConvention(),
                          "attributes" => [
-                             "name" => $dejavu_l2_language->name,
-                             "short_name" => $dejavu_l2_language->short_name
+                             "name" => $trust_levels->name,
                          ]
                      ]
                  ]
@@ -48,7 +47,7 @@ class DejavuL2LanguagesTest extends TestCase
     {
         $user = User::factory()->make();
         Passport::actingAs($user);
-        $dejavu_l2_languages = DejavuL2Language::factory(3)->make();
+        $trust_levels = TrustLevel::factory(3)->make();
         $this->getJson(self::ENDPOINT, [
             'accept' => 'application/vnd.api+json',
             'content-type' => 'application/vnd.api+json'
@@ -64,10 +63,9 @@ class DejavuL2LanguagesTest extends TestCase
         Passport::actingAs($user);
         $this->postJson(self::ENDPOINT, [
             'data' => [
-                'type' => DejavuL2Language::typeNameConvention(),
+                'type' => TrustLevel::typeNameConvention(),
                 'attributes' => [
-                    'name' => 'Spanish',
-                    'short_name' => 'SP'
+                    'name' => 'Moderate',
                 ]
             ]
         ], [
@@ -77,21 +75,20 @@ class DejavuL2LanguagesTest extends TestCase
             ->assertJson(
                 [
                     'data' => [
-                        'id' => '3',
-                        'type' => DejavuL2Language::typeNameConvention(),
+                        'id' => '4',
+                        'type' => TrustLevel::typeNameConvention(),
                         'attributes' => [
-                            'name' => 'Spanish',
-                            'short_name' => 'SP',
+                            'name' => 'Moderate',
                             'updated_at' => now()->setMilliseconds(0)->toJSON(),
                             'created_at' => now()->setMilliseconds(0)->toJSON()
                         ]
                     ]
                 ]
-            )->assertHeader('Location', url(self::ENDPOINT . '3'));
+            )->assertHeader('Location', url(self::ENDPOINT . '4'));
 
-        $this->assertDatabaseHas('dejavu_l2_languages', [
-           'id' => 3,
-           'name' => 'Spanish'
+        $this->assertDatabaseHas('trust_levels', [
+           'id' => 2,
+           'name' => 'Moderate'
         ]);
     }
 
@@ -102,14 +99,14 @@ class DejavuL2LanguagesTest extends TestCase
     {
         $user = User::factory()->make();
         Passport::actingAs($user);
-        $dejavu_l2_language = DejavuL2Language::factory()->make();
+        $trust_level = TrustLevel::factory()->make();
 
         $this->patchJson(self::ENDPOINT . '1', [
             'data' => [
                 'id' =>  '1',
-                'type' => DejavuL2Language::typeNameConvention(),
+                'type' => TrustLevel::typeNameConvention(),
                 'attributes' => [
-                    'name' => 'English-Muck'
+                    'name' => 'Low Level'
                 ]
             ]
         ], [
@@ -120,20 +117,19 @@ class DejavuL2LanguagesTest extends TestCase
                 [
                     'data' => [
                         'id' => '1',
-                        'type' => DejavuL2Language::typeNameConvention(),
+                        'type' => TrustLevel::typeNameConvention(),
                         'attributes' => [
-                            'name' => 'English-Muck',
-                            'short_name' => 'EN',
-                            'updated_at' => $dejavu_l2_language->updated_at->toJSON(),
-                            'created_at' => $dejavu_l2_language->created_at->toJSON()
+                            'name' => 'Low Level',
+                            'updated_at' => $trust_level->updated_at->toJSON(),
+                            'created_at' => $trust_level->created_at->toJSON()
                         ]
                     ]
                 ]
             );
 
-        $this->assertDatabaseHas('dejavu_l2_languages', [
+        $this->assertDatabaseHas('trust_levels', [
             'id' => 1,
-            'name' => 'English-Muck'
+            'name' => 'Low Level'
         ]);
     }
 
@@ -144,16 +140,16 @@ class DejavuL2LanguagesTest extends TestCase
     {
         $user = User::factory()->make();
         Passport::actingAs($user);
-        $dejavu_l2_language = DejavuL2Language::factory()->make();
+        $trust_level = TrustLevel::factory()->make();
 
         $this->delete(self::ENDPOINT . '1', [], [
             'accept' => 'application/vnd.api+json',
             'content-type' => 'application/vnd.api+json'
         ])->assertStatus(204);
 
-        $this->assertDatabaseMissing('dejavu_l2_languages', [
+        $this->assertDatabaseMissing('trust_levels', [
             'id' => 1,
-            'name' => $dejavu_l2_language->name
+            'name' => $trust_level->name
         ]);
     }
 
@@ -163,10 +159,9 @@ class DejavuL2LanguagesTest extends TestCase
         Passport::actingAs($user);
         $this->postJson(self::ENDPOINT, [
             'data' => [
-                'type' => DejavuL2Language::typeNameConvention(),
+                'type' => TrustLevel::typeNameConvention(),
                 'attributes' => [
-                    'name' => 'Spanish',
-                    'short_name' => 'SPAAA', // Max: 3 but we put more than 3 for test purpose
+                    'name' => '', // Make it empty to test the validation. Because it is mandatory field.
                 ]
             ]
         ], [
@@ -177,18 +172,18 @@ class DejavuL2LanguagesTest extends TestCase
                 [
                     'errors' => [
                        0 => [ 'title' => 'Validation Error',
-                           'details' => 'The data.attributes.short name may not be greater than 3 characters.',
+                           'details' => 'The data.attributes.name field is required.',
                            'source' => [
-                               'pointer' => '/data/attributes/short_name'
+                               'pointer' => '/data/attributes/name'
                            ]
                        ]
                     ]
                 ]
             );
 
-        $this->assertDatabaseMissing('dejavu_l2_languages', [
-            'id' => 3,
-            'name' => 'Spanish'
+        $this->assertDatabaseMissing('trust_levels', [
+            'id' => 4,
+            'name' => 'Moderate'
         ]);
     }
 }

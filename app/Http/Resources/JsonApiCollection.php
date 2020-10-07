@@ -3,6 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
+use Illuminate\Http\Resources\MissingValue;
 
 class JsonApiCollection extends ResourceCollection
 {
@@ -16,7 +17,14 @@ class JsonApiCollection extends ResourceCollection
     public function toArray($request)
     {
         return [
-            'data' => $this->collection
+            'data' => $this->collection,
+            'included' => $this->mergeIncludedRelations($request)
         ];
+    }
+
+    private function mergeIncludedRelations($request)
+    {
+        $includes = $this->collection->flatMap->included($request)->unique()->values();
+        return $includes->isNotEmpty() ? $includes : new MissingValue();
     }
 }

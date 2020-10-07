@@ -13,8 +13,21 @@ class DejavuL2Language extends AbstractApiModel
         'short_name'
     ];
 
+    /**
+     * "type" name convention method. It is based on route name.
+     * @return false|string
+     */
+    public static function typeNameConvention()
+    {
+        return 'dejavu-l2-languages';
+    }
+
+    /**
+     * It is mandatory field for JSON:API specification, therefore I use class name as type.
+     * @return false|string
+     */
     public function type()
     {
-        return 'DejavuL2Languages';
+        return self::typeNameConvention();
     }
 }

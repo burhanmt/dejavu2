@@ -24,6 +24,8 @@ class TrustLevelFactory extends Factory
     {
         return [
             'name' => 'Low',
+            'created_at' => Carbon::now()->toJSON(),
+            'updated_at' => Carbon::now()->toJSON(),
         ];
     }
 }

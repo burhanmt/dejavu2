@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\DejavuL1Language;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateDejavuL1LanguageRequest extends FormRequest
@@ -26,7 +27,7 @@ class UpdateDejavuL1LanguageRequest extends FormRequest
         return [
             'data' => 'required|array',
             'data.id' => 'required|string',
-            'data.type' => 'required|in:DejavuL1Languages',
+            'data.type' => 'required|in:' . DejavuL1Language::typeNameConvention(),
             'data.attributes' => 'sometimes|required|array',
             'data.attributes.name' => 'sometimes|required|string|max:50',
             'data.attributes.short_name' => 'sometimes|required|string|max:3',

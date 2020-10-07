@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\Route;
  * ***************************************
  */
 
-// User Login
+/*---------------------------------------
+ *  User login
+ */
 Route::namespace('\App\Http\Controllers\Api\V1')->prefix('v1')->middleware('api')->group(function () {
     // Login v1
     Route::post(
@@ -16,6 +18,7 @@ Route::namespace('\App\Http\Controllers\Api\V1')->prefix('v1')->middleware('api'
         'LoginController@login'
     );
 });
+/*----------------------------------------*/
 
 Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix('v1')->group(function () {
     Route::apiResource(
@@ -26,5 +29,10 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
     Route::apiResource(
         'dejavu-l2-languages',
         'DejavuL2LanguagesController'
+    );
+
+    Route::apiResource(
+        'trust-levels',
+        'TrustLevelsController'
     );
 });
