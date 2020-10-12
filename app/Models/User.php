@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helpers\UserRoleTraitHelper;
 use BinaryCabin\LaravelUUID\Traits\HasUUID;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -17,6 +18,8 @@ class User extends Authenticatable
      * "uuid" field exists in the table.
      */
     use HasUUID;
+
+    use UserRoleTraitHelper;
 
     use HasFactory, Notifiable, HasApiTokens;
 

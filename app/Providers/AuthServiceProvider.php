@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\DejavuL1Language;
+use App\Policies\DejavuL1LanguagePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 use Laravel\Passport\Passport;
 
 class AuthServiceProvider extends ServiceProvider
@@ -14,7 +15,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
+        DejavuL1Language::class => DejavuL1LanguagePolicy::class,
     ];
 
     /**

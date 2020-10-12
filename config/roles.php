@@ -17,8 +17,8 @@
  *  4: It represents Dejavu administrator as "platform-moderator". He has all access of number 3. Plus, he can access
  *     Dejavu users' information and he can change them.
  *  5: It represents Dejavu administrator as "platform-admin". He can do everything except to delete a record.
- *  6: It represents Dejavu administrator as "master". He is the owner of the platform. He can do everything, including
- *     to delete any record or a user which is connected to Dejavu user or Dejavu administrator.
+ *  6: It represents Dejavu administrator as "platform-master". He is the owner of the platform. He can do everything,
+ *     including to delete any record or a user which is connected to Dejavu user or Dejavu administrator.
  *
  *    All those rules were defined by Burhan. (26 Sept. 2020 Saturday, 23:33 - Glasgow City, UK.
  */
@@ -29,5 +29,5 @@ return [
     'platform-editor' => 3,
     'platform-moderator' => 4,
     'platform-admin' => 5,
-    'master' => 6
+    'platform-master' => 6
 ];
