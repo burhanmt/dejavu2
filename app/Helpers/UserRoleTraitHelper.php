@@ -11,10 +11,7 @@ trait UserRoleTraitHelper
      */
     public function isCustomer(): bool
     {
-        if ($this->role === (int) config('roles.customer')) {
-            return true;
-        }
-        return false;
+        return $this->role === (int) config('roles.customer');
     }
 
     /**
@@ -22,10 +19,7 @@ trait UserRoleTraitHelper
      */
     public function isPartnerModerator(): bool
     {
-        if ($this->role === (int) config('roles.partner-moderator')) {
-            return true;
-        }
-        return false;
+        return $this->role === (int) config('roles.partner-moderator');
     }
 
     /**
@@ -33,10 +27,7 @@ trait UserRoleTraitHelper
      */
     public function isPartnerAdmin(): bool
     {
-        if ($this->role === (int) config('roles.partner-admin')) {
-            return true;
-        }
-        return false;
+        return $this->role === (int) config('roles.partner-admin');
     }
 
     /**
@@ -44,10 +35,7 @@ trait UserRoleTraitHelper
      */
     public function isPlatformEditor(): bool
     {
-        if ($this->role === (int) config('roles.platform-editor')) {
-            return true;
-        }
-        return false;
+        return $this->role === (int) config('roles.platform-editor');
     }
 
     /**
@@ -55,10 +43,7 @@ trait UserRoleTraitHelper
      */
     public function isPlatformModerator(): bool
     {
-        if ($this->role === (int) config('roles.platform-moderator')) {
-            return true;
-        }
-        return false;
+        return $this->role === (int) config('roles.platform-moderator');
     }
 
     /**
@@ -66,10 +51,7 @@ trait UserRoleTraitHelper
      */
     public function isPlatformAdmin(): bool
     {
-        if ($this->role === (int) config('roles.platform-admin')) {
-            return true;
-        }
-        return false;
+        return $this->role === (int) config('roles.platform-admin');
     }
 
     /**
@@ -77,10 +59,7 @@ trait UserRoleTraitHelper
      */
     public function isPlatformMaster(): bool
     {
-        if ($this->role === (int) config('roles.platform-master')) {
-            return true;
-        }
-        return false;
+        return $this->role === (int) config('roles.platform-master');
     }
 
     /**
@@ -89,8 +68,8 @@ trait UserRoleTraitHelper
     public function isPlatformAdmins()
     {
         if (
-            $this->role === (int) config('roles.platform-admin') ||
-            $this->role === (int) config('roles.platform-master')
+            $this->role === (int) config('roles.platform-admin')
+            || $this->role === (int) config('roles.platform-master')
         ) {
             return true;
         }
@@ -103,10 +82,10 @@ trait UserRoleTraitHelper
     public function isPlatformStaff()
     {
         if (
-            $this->role === (int) config('roles.platform-admin') ||
-            $this->role === (int) config('roles.platform-master') ||
-            $this->role === (int) config('roles.platform-moderator') ||
-            $this->role === (int) config('roles.platform-editor')
+            $this->role === (int) config('roles.platform-admin')
+            || $this->role === (int) config('roles.platform-master')
+            || $this->role === (int) config('roles.platform-moderator')
+            || $this->role === (int) config('roles.platform-editor')
         ) {
             return true;
         }
@@ -116,8 +95,8 @@ trait UserRoleTraitHelper
     public function isPartnerStaff()
     {
         if (
-            $this->role === (int) config('roles.partner-admin') ||
-            $this->role === (int) config('roles.partner-moderator')
+            $this->role === (int) config('roles.partner-admin')
+            || $this->role === (int) config('roles.partner-moderator')
         ) {
             return true;
         }
