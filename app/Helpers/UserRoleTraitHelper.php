@@ -65,41 +65,29 @@ trait UserRoleTraitHelper
     /**
      * @return bool
      */
-    public function isPlatformAdmins()
+    public function isPlatformAdmins(): bool
     {
-        if (
-            $this->role === (int) config('roles.platform-admin')
-            || $this->role === (int) config('roles.platform-master')
-        ) {
-            return true;
-        }
-        return false;
+        return $this->role === (int)config('roles.platform-admin')
+            || $this->role === (int)config('roles.platform-master');
     }
 
     /**
      * @return bool
      */
-    public function isPlatformStaff()
+    public function isPlatformStaff(): bool
     {
-        if (
-            $this->role === (int) config('roles.platform-admin')
-            || $this->role === (int) config('roles.platform-master')
-            || $this->role === (int) config('roles.platform-moderator')
-            || $this->role === (int) config('roles.platform-editor')
-        ) {
-            return true;
-        }
-        return false;
+        return $this->role === (int)config('roles.platform-admin')
+            || $this->role === (int)config('roles.platform-master')
+            || $this->role === (int)config('roles.platform-moderator')
+            || $this->role === (int)config('roles.platform-editor');
     }
 
-    public function isPartnerStaff()
+    /**
+     * @return bool
+     */
+    public function isPartnerStaff(): bool
     {
-        if (
-            $this->role === (int) config('roles.partner-admin')
-            || $this->role === (int) config('roles.partner-moderator')
-        ) {
-            return true;
-        }
-        return false;
+        return $this->role === (int)config('roles.partner-admin')
+            || $this->role === (int)config('roles.partner-moderator');
     }
 }
