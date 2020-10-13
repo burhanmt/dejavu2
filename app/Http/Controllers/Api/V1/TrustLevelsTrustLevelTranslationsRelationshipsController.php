@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\JsonApiIdentifierResource;
 use App\Models\TrustLevel;
+use Illuminate\Http\Request;
 
 class TrustLevelsTrustLevelTranslationsRelationshipsController extends Controller
 {

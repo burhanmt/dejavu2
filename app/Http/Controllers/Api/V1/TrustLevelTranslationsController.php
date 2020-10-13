@@ -15,7 +15,7 @@ class TrustLevelTranslationsController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

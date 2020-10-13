@@ -22,11 +22,12 @@ class DejavuL2LanguageFactory extends Factory
      */
     public function definition()
     {
+        $timestamp = Carbon::now()->toJSON();
         return [
             'name' => 'English',
             'short_name' => 'EN',
-            'created_at' => Carbon::now()->toJSON(),
-            'updated_at' => Carbon::now()->toJSON(),
+            'created_at' => $timestamp,
+            'updated_at' => $timestamp,
         ];
     }
 }

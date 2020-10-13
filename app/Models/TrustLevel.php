@@ -38,7 +38,7 @@ class TrustLevel extends AbstractApiModel
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function trustLevelTranslation()
+    public function trustLevelTranslations()
     {
         return $this->hasMany(TrustLevelTranslation::class);
     }

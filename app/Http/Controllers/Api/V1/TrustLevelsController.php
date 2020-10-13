@@ -26,7 +26,7 @@ class TrustLevelsController extends Controller
                     'created_at',
                     'updated_at'
                 ]
-            )->allowedIncludes(['trustLevelTranslation'])
+            )->allowedIncludes(['trustLevelTranslations'])
              ->jsonPaginate();
 
         return new JsonApiCollection($trust_levels);
@@ -59,7 +59,7 @@ class TrustLevelsController extends Controller
     public function show(TrustLevel $trust_level, Request $request)
     {
         $query = QueryBuilder::for(TrustLevel::where('id', $trust_level->id))
-            ->allowedIncludes('trustLevelTranslation')
+            ->allowedIncludes('trustLevelTranslations')
             ->firstOrFail();
 
         $translation_array = [];

@@ -147,7 +147,6 @@ class DejavuL1LanguagesTest extends TestCase
     public function testDelete()
     {
         $user = User::factory()->make();
-        dump($user);
         Passport::actingAs($user);
         $dejavu_l1_language = DejavuL1Language::factory()->make();
 

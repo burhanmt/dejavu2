@@ -30,15 +30,16 @@ class JsonApiResource extends JsonResource
             ->flatMap(function ($related) {
                 $relatedType = $related['type'];
                 $relationship = $related['method'];
+                $model = $related['model'];
                 return [
                     $relatedType => [
                         'self'    => route(
                             "{$this->type()}.relationships.{$relatedType}",
-                            ['id' => $this->id]
+                            [$model => $this->id]
                         ),
                         'related' => route(
                             "{$this->type()}.{$relatedType}",
-                            ['id' => $this->id]
+                            [$model => $this->id]
                         ),
                         'data' => $this->prepareRelationshipData($relatedType, $relationship),
 
