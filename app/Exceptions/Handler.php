@@ -84,7 +84,7 @@ class Handler extends ExceptionHandler
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        if ($request->expectsJson()) {
+        // if ($request->expectsJson()) {
             return response()->json(
                 [
                     'errors' => [
@@ -94,7 +94,7 @@ class Handler extends ExceptionHandler
                 ],
                 403
             );
-        }
-        return redirect()->guest($exception->redirectTo() ?? route('login'));
+        // }
+        // return redirect()->guest($exception->redirectTo() ?? route('login'));
     }
 }

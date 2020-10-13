@@ -32,14 +32,14 @@ class JsonApiResource extends JsonResource
                 $relationship = $related['method'];
                 return [
                     $relatedType => [
-//                        'self'    => route(
-//                            "{$this->type()}.relationships.{$relatedType}",
-//                            ['id' => $this->id]
-//                        ),
-//                        'related' => route(
-//                            "{$this->type()}.{$relatedType}",
-//                            ['id' => $this->id]
-//                        ),
+                        'self'    => route(
+                            "{$this->type()}.relationships.{$relatedType}",
+                            ['id' => $this->id]
+                        ),
+                        'related' => route(
+                            "{$this->type()}.{$relatedType}",
+                            ['id' => $this->id]
+                        ),
                         'data' => $this->prepareRelationshipData($relatedType, $relationship),
 
                     ]

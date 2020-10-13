@@ -5,7 +5,7 @@ return [
         'trust-levels' => [
             'relationships' => [
                 [
-                    'type' => 'trust-levels',
+                    'type' => 'trust-level-translations',
                     'method' => 'trustLevelTranslation'
                 ]
             ]

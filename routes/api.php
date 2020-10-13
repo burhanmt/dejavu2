@@ -1,5 +1,4 @@
 <?php
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /**
@@ -35,4 +34,9 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
         'trust-levels',
         'TrustLevelsController'
     );
+
+    Route::get('trust-levels/{id}/relationships/trust-level-translations', 'TrustLevelsTrustLevelTranslationsRelationshipsController@index')
+        ->name('trust-levels.relationships.trust-level-translations');
+    Route::get('trust-levels/{id}/trust-level-translations', 'TrustLevelsTrustLevelTranslationsRelatedController@index')
+        ->name('trust-levels.trust-level-translations');
 });
