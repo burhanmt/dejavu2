@@ -65,7 +65,7 @@ class DejavuL2LanguagePolicy
      */
     public function delete(User $user, DejavuL2Language $dejavuL2Language)
     {
-        $user->isPlatformMaster();
+        return $user->isPlatformMaster();
     }
 
     /**
@@ -89,6 +89,6 @@ class DejavuL2LanguagePolicy
      */
     public function forceDelete(User $user, DejavuL2Language $dejavuL2Language)
     {
-        $user->isPlatformMaster();
+        return $user->isPlatformMaster();
     }
 }

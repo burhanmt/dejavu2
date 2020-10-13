@@ -10,6 +10,7 @@ class TrustLevelsTrustLevelTranslationsRelatedController extends Controller
 {
     public function index(TrustLevel $trustLevel)
     {
+        dump($trustLevel->trustLevelTranslations);
         return new JsonApiCollection($trustLevel->trustLevelTranslations);
     }
 }
