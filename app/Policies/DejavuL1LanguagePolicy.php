@@ -10,11 +10,6 @@ class DejavuL1LanguagePolicy
 {
     use HandlesAuthorization;
 
-    public function __construct()
-    {
-        //
-    }
-
     /**
      * Determine whether the user can view any dejavu l1 languages.
      *
@@ -40,13 +35,14 @@ class DejavuL1LanguagePolicy
 
     /**
      * Determine whether the user can create dejavu l1 languages.
+     * Only Platform admins can create it. (Admin and master)
      *
      * @param User $user
      * @return bool
      */
     public function create(User $user)
     {
-        //
+        return $user->isPlatformAdmins() || $user->isPlatformModerator();
     }
 
     /**
@@ -58,7 +54,7 @@ class DejavuL1LanguagePolicy
      */
     public function update(User $user, DejavuL1Language $dejavuL1Language)
     {
-        //
+        return $user->isPlatformStaff();
     }
 
     /**
@@ -70,7 +66,7 @@ class DejavuL1LanguagePolicy
      */
     public function delete(User $user, DejavuL1Language $dejavuL1Language)
     {
-        //
+        $user->isPlatformMaster();
     }
 
     /**
@@ -82,7 +78,7 @@ class DejavuL1LanguagePolicy
      */
     public function restore(User $user, DejavuL1Language $dejavuL1Language)
     {
-        //
+        return $user->isPlatformAdmins() || $user->isPlatformModerator();
     }
 
     /**
@@ -94,6 +90,6 @@ class DejavuL1LanguagePolicy
      */
     public function forceDelete(User $user, DejavuL1Language $dejavuL1Language)
     {
-        //
+        $user->isPlatformMaster();
     }
 }

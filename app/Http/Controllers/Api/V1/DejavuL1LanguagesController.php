@@ -8,10 +8,23 @@ use App\Http\Requests\UpdateDejavuL1LanguageRequest;
 use App\Http\Resources\JsonApiCollection;
 use App\Http\Resources\JsonApiResource;
 use App\Models\DejavuL1Language;
+use Illuminate\Support\Facades\Gate;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class DejavuL1LanguagesController extends Controller
 {
+    /**
+     * DejavuL1LanguagesController constructor.
+     */
+    public function __construct()
+    {
+        /**
+         * dejavu_l1_language is route parameter representative like:
+         * api/v1/dejavu-l1-languages/{dejavu_l1_language}
+         *
+         */
+        $this->authorizeResource(DejavuL1Language::class, 'dejavu_l1_language');
+    }
     /**
      * @return JsonApiCollection
      */

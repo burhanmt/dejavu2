@@ -13,6 +13,18 @@ use Spatie\QueryBuilder\QueryBuilder;
 class DejavuL2LanguagesController extends Controller
 {
     /**
+     * DejavuL2LanguagesController constructor.
+     */
+    public function __construct()
+    {
+        /**
+         * dejavu_l2_language is route parameter representative like:
+         * api/v1/dejavu-l2-languages/{dejavu_l2_language}
+         *
+         */
+        $this->authorizeResource(DejavuL2Language::class, 'dejavu_l2_language');
+    }
+    /**
      * @return JsonApiCollection
      */
     public function index()
