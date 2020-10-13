@@ -18,7 +18,7 @@ class CreateDejavuExpressionsTable extends Migration
             $table->unsignedBigInteger('dejavu_l2_language_id');
             $table->unsignedBigInteger('dejavu_category_id')->nullable();
             $table->unsignedBigInteger('dejavu_subcategory_id')->nullable();
-            $table->char('expression', 255);
+            $table->string('expression', 255);
             $table->unsignedBigInteger('trust_level_id')->nullable();
             $table->timestamps();
         });

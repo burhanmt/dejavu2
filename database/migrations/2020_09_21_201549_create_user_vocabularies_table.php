@@ -21,10 +21,10 @@ class CreateUserVocabulariesTable extends Migration
             $table->unsignedBigInteger('dejavu_l2_language_id');
             $table->unsignedBigInteger('user_category_id')->nullable();
             $table->unsignedBigInteger('user_subcategory_id')->nullable();
-            $table->char('vocabulary', 100);
-            $table->char('cefr_level', 2)->nullable();
-            $table->char('british_ipa', 100)->nullable();
-            $table->char('american_ipa', 100)->nullable();
+            $table->string('vocabulary', 100);
+            $table->string('cefr_level', 2)->nullable();
+            $table->string('british_ipa', 100)->nullable();
+            $table->string('american_ipa', 100)->nullable();
             $table->unsignedSmallInteger('corpus_frequency_level')->nullable();
             $table->timestamps();
         });

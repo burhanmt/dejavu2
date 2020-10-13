@@ -16,7 +16,7 @@ class CreateDejavuVocabularyImagesTable extends Migration
         Schema::create('dejavu_vocabulary_images', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('dejavu_vocabulary_id');
-            $table->char('image_location');
+            $table->string('image_location');
             $table->timestamps();
         });
 

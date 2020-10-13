@@ -62,6 +62,9 @@ class DejavuL2LanguagesTest extends TestCase
     {
         $user = User::factory()->make();
         Passport::actingAs($user);
+        $timestamp = now()
+            ->setMilliseconds(0)
+            ->toJSON();
         $this->postJson(self::ENDPOINT, [
             'data' => [
                 'type' => DejavuL2Language::typeNameConvention(),
@@ -82,8 +85,8 @@ class DejavuL2LanguagesTest extends TestCase
                         'attributes' => [
                             'name' => 'Spanish',
                             'short_name' => 'SP',
-                            'updated_at' => now()->setMilliseconds(0)->toJSON(),
-                            'created_at' => now()->setMilliseconds(0)->toJSON()
+                            'updated_at' => $timestamp,
+                            'created_at' => $timestamp
                         ]
                     ]
                 ]

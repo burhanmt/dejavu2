@@ -16,8 +16,8 @@ class CreateDejavuClientsTable extends Migration
         Schema::create('dejavu_clients', function (Blueprint $table) {
             $table->id();
             $table->uuid('uuid')->nullable()->unique();
-            $table->char('client_name', 100);
-            $table->char('client_domain_name', 50)->nullable();
+            $table->string('client_name', 100);
+            $table->string('client_domain_name', 50)->nullable();
             $table->boolean('enabled')->default(0);
             $table->timestamps();
         });

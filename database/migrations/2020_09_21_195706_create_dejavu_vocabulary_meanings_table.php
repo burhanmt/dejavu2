@@ -16,7 +16,7 @@ class CreateDejavuVocabularyMeaningsTable extends Migration
         Schema::create('dejavu_vocabulary_meanings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('dejavu_vocabulary_id');
-            $table->char('meaning', 255);
+            $table->string('meaning', 255);
             $table->timestamps();
         });
 

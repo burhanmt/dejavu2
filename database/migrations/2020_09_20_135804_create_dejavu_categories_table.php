@@ -15,7 +15,7 @@ class CreateDejavuCategoriesTable extends Migration
     {
         Schema::create('dejavu_categories', function (Blueprint $table) {
             $table->id();
-            $table->char('name', 50);
+            $table->string('name', 50);
             $table->timestamps();
         });
 

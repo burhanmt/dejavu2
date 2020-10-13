@@ -22,9 +22,9 @@ class CreateUserSubscriptionHistoriesTable extends Migration
             $table->boolean('enabled')->default(0);
             $table->float('package_price')->default(0);
             $table->float('final_price')->default(0);
-            $table->char('utm_source', 100)->nullable();
-            $table->char('utm_medium', 100)->nullable();
-            $table->char('utm_campaign', 100)->nullable();
+            $table->string('utm_source', 100)->nullable();
+            $table->string('utm_medium', 100)->nullable();
+            $table->string('utm_campaign', 100)->nullable();
             $table->timestamps();
         });
 

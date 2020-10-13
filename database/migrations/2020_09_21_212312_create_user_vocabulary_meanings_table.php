@@ -16,7 +16,7 @@ class CreateUserVocabularyMeaningsTable extends Migration
         Schema::create('user_vocabulary_meanings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_vocabulary_id');
-            $table->char('meaning', 255);
+            $table->string('meaning', 255);
             $table->timestamps();
         });
 

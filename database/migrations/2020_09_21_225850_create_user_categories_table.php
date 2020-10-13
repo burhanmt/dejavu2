@@ -16,7 +16,7 @@ class CreateUserCategoriesTable extends Migration
         Schema::create('user_categories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->char('name', 50);
+            $table->string('name', 50);
             $table->timestamps();
         });
 

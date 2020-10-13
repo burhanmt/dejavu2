@@ -61,6 +61,9 @@ class TrustLevelsTest extends TestCase
     {
         $user = User::factory()->make();
         Passport::actingAs($user);
+        $timestamp = now()
+            ->setMilliseconds(0)
+            ->toJSON();
         $this->postJson(self::ENDPOINT, [
             'data' => [
                 'type' => TrustLevel::typeNameConvention(),
@@ -79,8 +82,8 @@ class TrustLevelsTest extends TestCase
                         'type' => TrustLevel::typeNameConvention(),
                         'attributes' => [
                             'name' => 'Moderate',
-                            'updated_at' => now()->setMilliseconds(0)->toJSON(),
-                            'created_at' => now()->setMilliseconds(0)->toJSON()
+                            'updated_at' => $timestamp,
+                            'created_at' => $timestamp
                         ]
                     ]
                 ]
@@ -185,5 +188,54 @@ class TrustLevelsTest extends TestCase
             'id' => 4,
             'name' => 'Moderate'
         ]);
+    }
+
+    public function testRelatedLink()
+    {
+        $user = User::factory()->make();
+        Passport::actingAs($user);
+        $this->getJson(self::ENDPOINT . '1/relationships/trust-level-translations', [
+            'accept'       => 'application/vnd.api+json',
+            'content-type' => 'application/vnd.api+json'
+        ])->assertStatus(200)
+            ->assertJson(
+                [
+                    'data' => [
+                        0 => [
+                        'id' => '1',
+                        'type' => 'trust-level-translations'
+                        ]
+                    ]
+                ]
+            );
+    }
+
+    public function testSelfLink()
+    {
+        $user = User::factory()->make();
+        Passport::actingAs($user);
+        $this->getJson(
+            self::ENDPOINT . '1/trust-level-translations',
+            [
+                'accept'       => 'application/vnd.api+json',
+                'content-type' => 'application/vnd.api+json'
+            ]
+        )->assertStatus(200)
+            ->assertJson(
+                [
+                    'data' => [
+                        0 => [
+                            'id'   => '1',
+                            'type' => 'trust-level-translations',
+                            'attributes' => [
+                                'trust_level_id' => 1,
+                                'dejavu_l1_language_id' => 2,
+                                'name' => 'Düşük'
+
+                            ]
+                        ]
+                    ]
+                ]
+            );
     }
 }

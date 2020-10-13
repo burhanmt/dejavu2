@@ -16,7 +16,7 @@ class CreateDejavuSubcategoriesTable extends Migration
         Schema::create('dejavu_subcategories', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('dejavu_category_id');
-            $table->char('name', 50);
+            $table->string('name', 50);
             $table->timestamps();
         });
 

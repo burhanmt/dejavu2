@@ -19,10 +19,10 @@ class CreateDejavuVocabulariesTable extends Migration
             $table->unsignedBigInteger('dejavu_l2_language_id');
             $table->unsignedBigInteger('dejavu_category_id')->nullable();
             $table->unsignedBigInteger('dejavu_subcategory_id')->nullable();
-            $table->char('vocabulary', 100);
-            $table->char('cefr_level', 2)->nullable();
-            $table->char('british_ipa', 100)->nullable();
-            $table->char('american_ipa', 100)->nullable();
+            $table->string('vocabulary', 100);
+            $table->string('cefr_level', 2)->nullable();
+            $table->string('british_ipa', 100)->nullable();
+            $table->string('american_ipa', 100)->nullable();
             $table->unsignedSmallInteger('corpus_frequency_level')->nullable();
             $table->unsignedBigInteger('trust_level_id')->nullable();
             $table->timestamps();

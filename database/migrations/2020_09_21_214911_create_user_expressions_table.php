@@ -20,7 +20,7 @@ class CreateUserExpressionsTable extends Migration
             $table->unsignedBigInteger('dejavu_l2_language_id');
             $table->unsignedBigInteger('user_category_id')->nullable();
             $table->unsignedBigInteger('user_subcategory_id')->nullable();
-            $table->char('expression', 255);
+            $table->string('expression', 255);
             $table->timestamps();
         });
 
