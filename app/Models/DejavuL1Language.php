@@ -17,6 +17,7 @@ class DejavuL1Language extends AbstractApiModel
 
     /**
      * "type" name convention method. It is based on route name.
+     *
      * @return false|string
      */
     public static function typeNameConvention()
@@ -25,7 +26,8 @@ class DejavuL1Language extends AbstractApiModel
     }
 
     /**
-     * It is mandatory field for JSON:API specification, therefore I use class name as type.
+     * It is mandatory field for JSON:API specification, therefore I use route name as type.
+     *
      * @return false|string
      */
     public function type()
