@@ -7,8 +7,10 @@ Laravel 8 is used for the project. This repo is all about the API only. It repre
 are strictly separated. The application (web, mobile) will be developed later by consuming this API.
 
 ## Code Standards
-PSR-12 for coding standard, PSR-4 for namespace convention standard is followed up.
+PSR-12 for coding standard, PSR-4 for namespace convention standard is followed.
 
+## JSON API Specification
+I strictly followed JSON API specification for the JSON format. Look at [here](https://jsonapi.org/format/) for more info. 
 ## Folder Structure
 - **Models** --> All models
 - **Api Controllers** --> app/Http/Controllers/Api/V1
@@ -37,7 +39,7 @@ For instance:
 ```
 
 ## First Installation of the Platform
-1. composer install
+1. composer update
 2. npm i
 3. npm run dev
 4. php artisan migrate
