@@ -19,17 +19,17 @@ class TrustLevelsController extends Controller
      */
     public function index()
     {
-//        $trustLevels = QueryBuilder::for(TrustLevel::class)
-//            ->allowedSorts(
-//                [
-//                    'name',
-//                    'created_at',
-//                    'updated_at'
-//                ]
-//            )->allowedIncludes(['trustLevelTranslations'])
-//             ->jsonPaginate();
-//
-//        return new JsonApiCollection($trustLevels);
+        $trustLevels = QueryBuilder::for(TrustLevel::class)
+            ->allowedSorts(
+                [
+                    'name',
+                    'created_at',
+                    'updated_at'
+                ]
+            )->allowedIncludes(['trustLevelTranslations'])
+             ->jsonPaginate();
+
+        return new JsonApiCollection($trustLevels);
     }
 
     /**
