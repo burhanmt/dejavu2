@@ -12,7 +12,7 @@ class SetupDejavuAdmins extends Command
      *
      * @var string
      */
-    protected $signature = 'setup:dejavu-admins';
+    protected $signature = 'setup:dejavu';
 
     /**
      * The console command description.

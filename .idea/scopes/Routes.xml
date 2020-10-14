@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Routes" pattern="file[dejavu2]:routes//*" />
+</component>

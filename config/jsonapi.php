@@ -7,7 +7,7 @@ return [
                 [
                     'type' => 'trust-level-translations',
                     'method' => 'trustLevelTranslations',
-                    'model' => 'trust_level'
+                    'model' => 'trust_level' // modal name but snake case
                 ]
             ]
         ],
@@ -16,7 +16,7 @@ return [
                 [
                     'type'   => 'part-of-speech-translations',
                     'method' => 'partOfSpeechTranslations',
-                    'model'  => 'part_of_speech'
+                    'model'  => 'part_of_speech' // modal name but snake case
                 ]
             ]
         ],
