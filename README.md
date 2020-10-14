@@ -1,13 +1,13 @@
 ## About Project
 Dejavu English is a vocabulary builder application that helps the users to learn more vocabularies by using ML and AI.
 Each vocabulary individually traces to find out the retention interval of the user.
-The goal of the program is making the user's vocabularies from Sensory memory to Long-term memory.
+The goal of the program is making the user's vocabularies from Sensory memory level to Long-term memory level.
 
-Larave 8 was used for the project. This repo is all about the API only. It represents business logic of the project. The application logic and business logic
-are strictly separated. The application (web, mobile) will be developed later.
+Laravel 8 is used for the project. This repo is all about the API only. It represents the business logic of the project. The application logic and business logic
+are strictly separated. The application (web, mobile) will be developed later by consuming this API.
 
 ## Code Standards
-PSR-12 for coding standard, PSR-4 for namespace conventions is followed up.
+PSR-12 for coding standard, PSR-4 for namespace convention standard is followed up.
 
 ## Folder Structure
 - **Models** --> All models
@@ -20,10 +20,11 @@ PSR-12 for coding standard, PSR-4 for namespace conventions is followed up.
 - **All roles** --> "config/roles.php"  and "app/Helpers/UserRoleTraitHelper.php"  
 - **Database** --> All migrations file are there
 - **tests** --> All tests stuff are there.
+- **routes** --> All API routes are in the routes/api.php
 
 ## Roles
 I prefer static pre-created roles. Because of the simplicity. You can find all roles in
-the **config/roles.php** file and then there is a helper trait which is  **app/Helpers/UserRoleTraitHelper.php**
+the **config/roles.php** file and there is a helper trait which is  **app/Helpers/UserRoleTraitHelper.php**
 and **app/Models/User.php** is using this role helper trait. It gives us flexibility to access
 the user's role by using policies which are in **app/Policies/** folder.
 
