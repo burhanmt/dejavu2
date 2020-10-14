@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="Factories" pattern="file[dejavu2]:database/factories//*" />
+</component>

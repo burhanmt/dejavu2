@@ -18,7 +18,7 @@ class DejavuL2LanguagesController extends Controller
     public function __construct()
     {
         /**
-         * dejavu_l2_language is route parameter representative like:
+         * dejavu_l2_language is router parameter representative like:
          * api/v1/dejavu-l2-languages/{dejavu_l2_language}
          *
          */

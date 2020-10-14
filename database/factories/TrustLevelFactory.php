@@ -23,6 +23,7 @@ class TrustLevelFactory extends Factory
     public function definition()
     {
         $timestamp = Carbon::now()->toJSON();
+
         return [
             'name' => 'Low',
             'created_at' => $timestamp,

@@ -112,7 +112,9 @@ class DejavuL2LanguagesTest extends TestCase
                 'id' =>  '1',
                 'type' => DejavuL2Language::typeNameConvention(),
                 'attributes' => [
-                    'name' => 'English-Muck'
+                    'name' => 'English-Muck',
+                    'updated_at' => $dejavu_l2_language->updated_at->toJSON(),
+                    'created_at' => $dejavu_l2_language->created_at->toJSON()
                 ]
             ]
         ], [

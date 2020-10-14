@@ -20,5 +20,14 @@ return [
                 ]
             ]
         ],
+        'memory-levels' => [
+            'relationships' => [
+                [
+                    'type'   => 'memory-level-translations', //route name
+                    'method' => 'memoryLevelTranslations', //relationship method name
+                    'model'  => 'memory_level' // modal name but snake case
+                ]
+            ]
+        ],
     ]
 ];

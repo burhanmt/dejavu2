@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class MemoryLevelTranslation extends Model
+
+class MemoryLevelTranslation extends AbstractApiModel
 {
     use HasFactory;
 
@@ -15,4 +15,24 @@ class MemoryLevelTranslation extends Model
         'name',
         'description'
     ];
+
+    /**
+     * "type" name convention method. It is based on route name.
+     *
+     * @return false|string
+     */
+    public static function typeNameConvention()
+    {
+        return 'memory-level-translations';
+    }
+
+    /**
+     * It is mandatory field for JSON:API specification, therefore I use class name as type.
+     *
+     * @return false|string
+     */
+    public function type()
+    {
+        return self::typeNameConvention();
+    }
 }

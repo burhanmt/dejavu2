@@ -25,7 +25,9 @@ I strictly followed JSON API specification for the JSON format. Look at [here](h
 - **routes** --> All API routes are in the routes/api.php
 
 ## Roles
-I prefer static pre-created roles. Because of the simplicity. You can find all roles in
+
+No need to spend much more time for the dynamic role system, therefore I preferred static pre-created roles. 
+Because of the simplicity. You can find all roles in
 the **config/roles.php** file and there is a helper trait which is  **app/Helpers/UserRoleTraitHelper.php**
 and **app/Models/User.php** is using this role helper trait. It gives us flexibility to access
 the user's role by using policies which are in **app/Policies/** folder.
@@ -430,5 +432,35 @@ class TrustLevelPolicy
         return $user->isPlatformMaster();
     }
 }
+```
+
+### 9. After creating the policy, open TrustLevelsController.php, then apply the policy for it via __construct() method like this:
+```
+    /**
+     * TrustLevelsController constructor.
+     */
+    public function __construct()
+    {
+        /**
+         * trust_level is router parameter representative like:
+         * api/v1/trust-levels/{trust_level}
+         */
+        $this->authorizeResource(TrustLevel::class, 'trust_level');
+    }
+```
+### 10. If everything is done, we can create routes in the "routes/api.php" like that:
+```
+    // TrustLevels
+    Route::apiResource(
+        'trust-levels',
+        'TrustLevelsController'
+    );
+```
+We should create the relationships route separately like that:
+```
+    Route::get('trust-levels/{trust_level}/relationships/trust-level-translations', 'TrustLevelsTrustLevelTranslationsRelationshipsController@index')
+        ->name('trust-levels.relationships.trust-level-translations');
+    Route::get('trust-levels/{trust_level}/trust-level-translations', 'TrustLevelsTrustLevelTranslationsRelatedController@index')
+        ->name('trust-levels.trust-level-translations');
 ```
 **That's all!**

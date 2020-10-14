@@ -13,7 +13,17 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class TrustLevelsController extends Controller
 {
-
+    /**
+     * TrustLevelsController constructor.
+     */
+    public function __construct()
+    {
+        /**
+         * trust_level is router parameter representative like:
+         * api/v1/trust-levels/{trust_level}
+         */
+        $this->authorizeResource(TrustLevel::class, 'trust_level');
+    }
     /**
      * @return JsonApiCollection
      */

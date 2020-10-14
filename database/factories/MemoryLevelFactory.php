@@ -2,18 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\DejavuL2Language;
+use App\Models\MemoryLevel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Carbon;
 
-class DejavuL2LanguageFactory extends Factory
+class MemoryLevelFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = DejavuL2Language::class;
+    protected $model = MemoryLevel::class;
 
     /**
      * Define the model's default state.
@@ -25,8 +20,8 @@ class DejavuL2LanguageFactory extends Factory
         $timestamp = Carbon::now()->toJSON();
 
         return [
-            'name' => 'English',
-            'short_name' => 'EN',
+            'name'       => 'Sensory memory',
+            'description' => 'test',
             'created_at' => $timestamp,
             'updated_at' => $timestamp,
         ];

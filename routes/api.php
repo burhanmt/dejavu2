@@ -56,4 +56,18 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
         'part-of-speeches/{part_of_speech}/part-of-speech-translations',
         'PartOfSpeechesPartOfSpeechTranslationsRelatedController@index'
     )->name('part-of-speeches.part-of-speech-translations');
+
+    // MemoryLevels
+    Route::apiResource(
+        'memory-levels',
+        'MemoryLevelsController'
+    );
+    Route::get(
+        'memory-levels/{memory_level}/relationships/memory-level-translations',
+        'MemoryLevelsMemoryLevelTranslationsRelationshipsController@index'
+    )->name('memory-levels.relationships.memory-level-translations');
+    Route::get(
+        'memory-levels/{memory_level}/memory-level-translations',
+        'MemoryLevelsMemoryLevelTranslationsRelatedController@index'
+    )->name('memory-levels.memory-level-translations');
 });

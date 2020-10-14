@@ -24,6 +24,7 @@ class DejavuL1LanguageFactory extends Factory
     public function definition()
     {
         $timestamp = Carbon::now()->toJSON();
+
         return [
             'name' => 'English',
             'short_name' => 'EN',

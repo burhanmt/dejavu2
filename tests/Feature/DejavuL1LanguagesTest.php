@@ -112,7 +112,9 @@ class DejavuL1LanguagesTest extends TestCase
                 'id' =>  '1',
                 'type' => DejavuL1Language::typeNameConvention(),
                 'attributes' => [
-                    'name' => 'English-Muck'
+                    'name' => 'English-Muck',
+                    'updated_at' => $dejavu_l1_language->updated_at->toJSON(),
+                    'created_at' => $dejavu_l1_language->created_at->toJSON()
                 ]
             ]
         ], [
