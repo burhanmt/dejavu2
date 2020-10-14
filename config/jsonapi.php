@@ -11,5 +11,14 @@ return [
                 ]
             ]
         ],
+        'part-of-speeches' => [
+            'relationships' => [
+                [
+                    'type'   => 'part-of-speech-translations',
+                    'method' => 'partOfSpeechTranslations',
+                    'model'  => 'part_of_speech'
+                ]
+            ]
+        ],
     ]
 ];

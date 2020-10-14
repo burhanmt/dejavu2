@@ -18,9 +18,4 @@ class UpdateDejavuL2LanguageRequest extends FormRequest
             'data.attributes.short_name' => 'sometimes|required|string|max:3',
         ];
     }
-
-    public function authorize()
-    {
-        return true;
-    }
 }

@@ -19,17 +19,17 @@ class TrustLevelsController extends Controller
      */
     public function index()
     {
-        $trust_levels = QueryBuilder::for(TrustLevel::class)
-            ->allowedSorts(
-                [
-                    'name',
-                    'created_at',
-                    'updated_at'
-                ]
-            )->allowedIncludes(['trustLevelTranslations'])
-             ->jsonPaginate();
-
-        return new JsonApiCollection($trust_levels);
+//        $trustLevels = QueryBuilder::for(TrustLevel::class)
+//            ->allowedSorts(
+//                [
+//                    'name',
+//                    'created_at',
+//                    'updated_at'
+//                ]
+//            )->allowedIncludes(['trustLevelTranslations'])
+//             ->jsonPaginate();
+//
+//        return new JsonApiCollection($trustLevels);
     }
 
     /**
@@ -38,35 +38,35 @@ class TrustLevelsController extends Controller
      */
     public function store(CreateTrustLevelRequest $request)
     {
-        $trust_level = TrustLevel::create(
+        $trustLevel = TrustLevel::create(
             [
                 'name' => $request->input('data.attributes.name'),
             ]
         );
 
-        return (new JsonApiResource($trust_level))
+        return (new JsonApiResource($trustLevel))
             ->response()
-            ->header('Location', route('trust-levels.show', ['trust_level' => $trust_level ]));
+            ->header('Location', route('trust-levels.show', ['trust_level' => $trustLevel ]));
     }
 
     /**
      * This method supports translation of the trust_level if you use ?translate=<dejavu_l1_language_id>
      *
-     * @param TrustLevel $trust_level
+     * @param TrustLevel $trustLevel
      * @param Request $request
      * @return JsonApiResource
      */
-    public function show(TrustLevel $trust_level, Request $request)
+    public function show(TrustLevel $trustLevel, Request $request)
     {
-        $query = QueryBuilder::for(TrustLevel::where('id', $trust_level->id))
+        $query = QueryBuilder::for(TrustLevel::where('id', $trustLevel->id))
             ->allowedIncludes('trustLevelTranslations')
             ->firstOrFail();
 
-        $translation_array = [];
+        $translationArray = [];
         if ($request->has('translate')) {
-            $get_translation = $trust_level->getTranslation($request->input('translate'));
+            $get_translation = $trustLevel->getTranslation($request->input('translate'));
             if (!empty($get_translation)) {
-                $translation_array = ['meta' => [
+                $translationArray = ['meta' => [
                 'translation' => $get_translation,
                 'dejavu_l1_language_id' => $request->input('translate')
                 ]];
@@ -74,28 +74,30 @@ class TrustLevelsController extends Controller
         }
         
         return (new JsonApiResource($query))
-            ->additional($translation_array);
+            ->additional($translationArray);
     }
 
     /**
      * @param UpdateTrustLevelRequest $request
-     * @param TrustLevel $trust_level
+     * @param TrustLevel $trustLevel
      * @return JsonApiResource
      */
-    public function update(UpdateTrustLevelRequest $request, TrustLevel $trust_level)
+    public function update(UpdateTrustLevelRequest $request, TrustLevel $trustLevel)
     {
-        $trust_level->update($request->input('data.attributes'));
-        return new JsonApiResource($trust_level);
+        $trustLevel->update($request->input('data.attributes'));
+
+        return new JsonApiResource($trustLevel);
     }
 
     /**
-     * @param TrustLevel $trust_level
+     * @param TrustLevel $trustLevel
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(TrustLevel $trust_level)
+    public function destroy(TrustLevel $trustLevel)
     {
-        $trust_level->delete();
+        $trustLevel->delete();
+
         return response(null, 204);
     }
 }

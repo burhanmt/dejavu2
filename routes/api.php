@@ -42,4 +42,18 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
         ->name('trust-levels.relationships.trust-level-translations');
     Route::get('trust-levels/{trust_level}/trust-level-translations', 'TrustLevelsTrustLevelTranslationsRelatedController@index')
         ->name('trust-levels.trust-level-translations');
+
+    // PartOfSpeeches
+    Route::apiResource(
+        'part-of-speeches',
+        'PartOfSpeechesController'
+    );
+    Route::get(
+        'part-of-speeches/{part_of_speech}/relationships/part-of-speech-translations',
+        'PartOfSpeechesPartOfSpeechTranslationsRelationshipsController@index'
+    )->name('part-of-speeches.relationships.part-of-speech-translations');
+    Route::get(
+        'part-of-speeches/{part_of_speech}/part-of-speech-translations',
+        'PartOfSpeechesPartOfSpeechTranslationsRelatedController@index'
+    )->name('part-of-speeches.part-of-speech-translations');
 });

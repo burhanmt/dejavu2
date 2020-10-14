@@ -16,9 +16,4 @@ class CreateTrustLevelRequest extends FormRequest
             'data.attributes.name' => 'required|string|max:50'
         ];
     }
-
-    public function authorize()
-    {
-        return true;
-    }
 }

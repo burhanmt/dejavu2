@@ -29,7 +29,7 @@ class DejavuL2LanguagesController extends Controller
      */
     public function index()
     {
-        $dejavu_l2_languages = QueryBuilder::for(DejavuL2Language::class)
+        $dejavuL2Languages = QueryBuilder::for(DejavuL2Language::class)
             ->allowedSorts(
                 [
                     'name',
@@ -38,7 +38,7 @@ class DejavuL2LanguagesController extends Controller
                     'updated_at'
                 ]
             )->jsonPaginate();
-        return new JsonApiCollection($dejavu_l2_languages);
+        return new JsonApiCollection($dejavuL2Languages);
     }
 
     /**
@@ -47,49 +47,49 @@ class DejavuL2LanguagesController extends Controller
      */
     public function store(CreateDejavuL2LanguageRequest $request)
     {
-        $dejavu_l2_language = DejavuL2Language::create(
+        $dejavuL2Language = DejavuL2Language::create(
             [
                 'name' => $request->input('data.attributes.name'),
                 'short_name' => $request->input('data.attributes.short_name')
             ]
         );
 
-        return (new JsonApiResource($dejavu_l2_language))
+        return (new JsonApiResource($dejavuL2Language))
             ->response()
-            ->header('Location', route('dejavu-l2-languages.show', ['dejavu_l2_language' => $dejavu_l2_language ]));
+            ->header('Location', route('dejavu-l2-languages.show', ['dejavu_l2_language' => $dejavuL2Language ]));
     }
 
     /**
-     * @param DejavuL2Language $dejavu_l2_language
+     * @param DejavuL2Language $dejavuL2Language
      * @return JsonApiResource
      */
-    public function show(DejavuL2Language $dejavu_l2_language)
+    public function show(DejavuL2Language $dejavuL2Language)
     {
-        return new JsonApiResource($dejavu_l2_language);
+        return new JsonApiResource($dejavuL2Language);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\DejavuL2Language  $dejavu_l2_language
+     * @param  \App\Models\DejavuL2Language  $dejavuL2Language
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDejavuL2LanguageRequest $request, DejavuL2Language $dejavu_l2_language)
+    public function update(UpdateDejavuL2LanguageRequest $request, DejavuL2Language $dejavuL2Language)
     {
-        $dejavu_l2_language->update($request->input('data.attributes'));
-        return new JsonApiResource($dejavu_l2_language);
+        $dejavuL2Language->update($request->input('data.attributes'));
+        return new JsonApiResource($dejavuL2Language);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\DejavuL2Language  $dejavu_l2_language
+     * @param  \App\Models\DejavuL2Language  $dejavuL2Language
      * @return \Illuminate\Http\Response
      */
-    public function destroy(DejavuL2Language $dejavu_l2_language)
+    public function destroy(DejavuL2Language $dejavuL2Language)
     {
-        $dejavu_l2_language->delete();
+        $dejavuL2Language->delete();
         return response(null, 204);
     }
 }

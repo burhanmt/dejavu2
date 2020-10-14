@@ -30,7 +30,7 @@ class DejavuL1LanguagesController extends Controller
      */
     public function index()
     {
-        $dejavu_l1_languages = QueryBuilder::for(DejavuL1Language::class)
+        $dejavuL1Languages = QueryBuilder::for(DejavuL1Language::class)
             ->allowedSorts(
                 [
                     'name',
@@ -40,7 +40,7 @@ class DejavuL1LanguagesController extends Controller
                     'updated_at'
                 ]
             )->jsonPaginate();
-        return new JsonApiCollection($dejavu_l1_languages);
+        return new JsonApiCollection($dejavuL1Languages);
     }
 
     /**
@@ -49,7 +49,7 @@ class DejavuL1LanguagesController extends Controller
      */
     public function store(CreateDejavuL1LanguageRequest $request)
     {
-        $dejavu_l1_language = DejavuL1Language::create(
+        $dejavuL1Language = DejavuL1Language::create(
             [
                 'name' => $request->input('data.attributes.name'),
                 'short_name' => $request->input('data.attributes.short_name'),
@@ -57,39 +57,39 @@ class DejavuL1LanguagesController extends Controller
             ]
         );
 
-        return (new JsonApiResource($dejavu_l1_language))
+        return (new JsonApiResource($dejavuL1Language))
             ->response()
-            ->header('Location', route('dejavu-l1-languages.show', ['dejavu_l1_language' => $dejavu_l1_language ]));
+            ->header('Location', route('dejavu-l1-languages.show', ['dejavu_l1_language' => $dejavuL1Language ]));
     }
 
     /**
-     * @param DejavuL1Language $dejavu_l1_language
+     * @param DejavuL1Language $dejavuL1Language
      * @return JsonApiResource
      */
-    public function show(DejavuL1Language $dejavu_l1_language)
+    public function show(DejavuL1Language $dejavuL1Language)
     {
-        return new JsonApiResource($dejavu_l1_language);
+        return new JsonApiResource($dejavuL1Language);
     }
 
     /**
      * @param UpdateDejavuL1LanguageRequest $request
-     * @param DejavuL1Language $dejavu_l1_language
+     * @param DejavuL1Language $dejavuL1Language
      * @return JsonApiResource
      */
-    public function update(UpdateDejavuL1LanguageRequest $request, DejavuL1Language $dejavu_l1_language)
+    public function update(UpdateDejavuL1LanguageRequest $request, DejavuL1Language $dejavuL1Language)
     {
-        $dejavu_l1_language->update($request->input('data.attributes'));
-        return new JsonApiResource($dejavu_l1_language);
+        $dejavuL1Language->update($request->input('data.attributes'));
+        return new JsonApiResource($dejavuL1Language);
     }
 
     /**
-     * @param DejavuL1Language $dejavu_l1_language
+     * @param DejavuL1Language $dejavuL1Language
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(DejavuL1Language $dejavu_l1_language)
+    public function destroy(DejavuL1Language $dejavuL1Language)
     {
-        $dejavu_l1_language->delete();
+        $dejavuL1Language->delete();
         return response(null, 204);
     }
 }
