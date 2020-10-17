@@ -1,3 +1,8 @@
+services:
+  - mysql
+  before_install:
+    - mysql -e 'CREATE DATABASE dejavu_test;'
+
 language: php
 
 php:
