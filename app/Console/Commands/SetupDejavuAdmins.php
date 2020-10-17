@@ -83,4 +83,10 @@ class SetupDejavuAdmins extends Command
             }
         }
     }
+
+    private function timeZoneTable()
+    {
+
+        $this->call('php artisan db:seed');
+    }
 }
