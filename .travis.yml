@@ -12,5 +12,5 @@ env:
 before_script:
   - travis_retry composer update ${COMPOSER_FLAGS}
 
-script:
-  - vendor/bin/phpunit
+# script:
+#  - vendor/bin/phpunit
