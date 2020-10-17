@@ -70,4 +70,32 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
         'memory-levels/{memory_level}/memory-level-translations',
         'MemoryLevelsMemoryLevelTranslationsRelatedController@index'
     )->name('memory-levels.memory-level-translations');
+
+    // Goals
+    Route::apiResource(
+        'goals',
+        'GoalsController'
+    );
+    Route::get(
+        'goals/{goal}/relationships/goal-translations',
+        'GoalsGoalTranslationsRelationshipsController@index'
+    )->name('goals.relationships.goal-translations');
+    Route::get(
+        'goals/{goal}/goal-translations',
+        'GoalsGoalTranslationsRelatedController@index'
+    )->name('goals.goal-translations');
+
+    // Interests
+    Route::apiResource(
+        'interests',
+        'InterestsController'
+    );
+    Route::get(
+        'interests/{interest}/relationships/interest-translations',
+        'InterestsInterestTranslationsRelationshipsController@index'
+    )->name('interests.relationships.interest-translations');
+    Route::get(
+        'interests/{interest}/interest-translations',
+        'InterestsInterestTranslationsRelatedController@index'
+    )->name('interests.interest-translations');
 });

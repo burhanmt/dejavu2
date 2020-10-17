@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class GoalTranslation extends Model
+class GoalTranslation extends AbstractApiModel
 {
     use HasFactory;
 
@@ -15,4 +14,24 @@ class GoalTranslation extends Model
         'name',
         'description'
     ];
+
+    /**
+     * "type" name convention method. It is based on route name.
+     *
+     * @return false|string
+     */
+    public static function typeNameConvention()
+    {
+        return 'goal-translations';
+    }
+
+    /**
+     * It is mandatory field for JSON:API specification, therefore I use route name as type.
+     *
+     * @return false|string
+     */
+    public function type()
+    {
+        return self::typeNameConvention();
+    }
 }

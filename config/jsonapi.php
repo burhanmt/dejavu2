@@ -29,5 +29,23 @@ return [
                 ]
             ]
         ],
+        'goals' => [
+            'relationships' => [
+                [
+                    'type'   => 'goal-translations', //route name
+                    'method' => 'goalTranslations', //relationship method name
+                    'model'  => 'goal' // modal name but snake case
+                ]
+            ]
+        ],
+        'interests' => [
+            'relationships' => [
+                [
+                    'type'   => 'interest-translations', //route name
+                    'method' => 'interestTranslations', //relationship method name
+                    'model'  => 'interest' // modal name but snake case
+                ]
+            ]
+        ],
     ]
 ];

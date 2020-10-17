@@ -3,53 +3,85 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateGoalRequest;
+use App\Http\Requests\UpdateGoalRequest;
+use App\Http\Resources\JsonApiCollection;
+use App\Http\Resources\JsonApiResource;
 use App\Models\Goal;
-use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class GoalsController extends Controller
 {
+
+    public function __construct()
+    {
+        /**
+         * goal is router parameter representative like:
+         * api/v1/goal/{goal}
+         */
+        $this->authorizeResource(Goal::class, 'goal');
+    }
+
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @return JsonApiCollection
      */
     public function index()
     {
-        //
+        $goals = QueryBuilder::for(Goal::class)
+            ->allowedSorts(
+                [
+                    'name',
+                    'created_at',
+                    'updated_at'
+                ]
+            )
+            ->allowedIncludes(['goalTranslations'])
+            ->jsonPaginate();
+
+        return new JsonApiCollection($goals);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateGoalRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateGoalRequest $request)
     {
-        //
+        $goal = Goal::create(
+            [
+                'name' => $request->input('data.attributes.name'),
+                'description' => $request->input('data.attributes.description'),
+            ]
+        );
+
+        return (new JsonApiResource($goal))
+            ->response()
+            ->header('Location', route('goals.show', ['goal' => $goal]));
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Goal  $goal
-     * @return \Illuminate\Http\Response
+     * @param Goal $goal
+     * @return JsonApiResource
      */
     public function show(Goal $goal)
     {
-        //
+        $query = QueryBuilder::for(Goal::where('id', $goal->id))
+            ->allowedIncludes('goalTranslations')
+            ->firstOrFail();
+
+        return (new JsonApiResource($query));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Goal  $goal
-     * @return \Illuminate\Http\Response
+     * @param UpdateGoalRequest $request
+     * @param Goal $goal
+     * @return JsonApiResource
      */
-    public function update(Request $request, Goal $goal)
+    public function update(UpdateGoalRequest $request, Goal $goal)
     {
-        //
+        $goal->update($request->input('data.attributes'));
+
+        return new JsonApiResource($goal);
     }
 
     /**
@@ -60,6 +92,8 @@ class GoalsController extends Controller
      */
     public function destroy(Goal $goal)
     {
-        //
+        $goal->delete();
+
+        return response(null, 204);
     }
 }
