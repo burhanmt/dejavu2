@@ -47,5 +47,14 @@ return [
                 ]
             ]
         ],
+        'dejavu-clients' => [
+            'relationships' => [
+                [
+                    'type' => 'users', //route name
+                    'method' => 'users', //relationship method name
+                    'model' => 'dejavu_client' // modal name but snake case
+                ]
+            ]
+        ],
     ]
 ];

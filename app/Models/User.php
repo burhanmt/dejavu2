@@ -55,4 +55,40 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * "type" name convention method. It is based on route name.
+     *
+     * @return false|string
+     */
+    public static function typeNameConvention()
+    {
+        return 'users';
+    }
+
+    /**
+     * It is mandatory field for JSON:API specification, therefore I use route name as type.
+     *
+     * @return false|string
+     */
+    public function type()
+    {
+        return self::typeNameConvention();
+    }
+
+    public function allowedAttributes()
+    {
+        return collect($this->attributes)
+            ->filter(
+                function ($item, $key) {
+                    return !collect($this->hidden)->contains($key) && $key !== 'id';
+                }
+            )
+            ->merge(
+                [
+                    'created_at' => $this->created_at,
+                    'updated_at' => $this->updated_at
+                ]
+            );
+    }
 }

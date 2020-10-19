@@ -98,4 +98,18 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
         'interests/{interest}/interest-translations',
         'InterestsInterestTranslationsRelatedController@index'
     )->name('interests.interest-translations');
+
+    // DejavuClients
+    Route::apiResource(
+        'dejavu-clients',
+        'DejavuClientsController'
+    );
+    Route::get(
+        'dejavu-clients/{dejavu_client}/relationships/users',
+        'DejavuClientsUsersRelationshipController@index'
+    )->name('dejavu-clients.relationships.users');
+    Route::get(
+        'dejavu-clients/{dejavu_client}/users',
+        'DejavuClientsUsersRelatedController@index'
+    )->name('dejavu-clients.users');
 });
