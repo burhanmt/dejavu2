@@ -33,7 +33,6 @@ class UsersController extends Controller
                     'name',
                     'family_name',
                     'email',
-                    'password',
                     'role',
                     'timezone',
                     'dejavu_client_id',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateGoalRequest;
 use App\Http\Requests\UpdateGoalRequest;
@@ -12,6 +13,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class GoalsController extends Controller
 {
+    use JsonApiResourceTraitHelper;
 
     public function __construct()
     {
@@ -47,16 +49,11 @@ class GoalsController extends Controller
      */
     public function store(CreateGoalRequest $request)
     {
-        $goal = Goal::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-                'description' => $request->input('data.attributes.description'),
-            ]
+        return $this->createResource(
+            Goal::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($goal))
-            ->response()
-            ->header('Location', route('goals.show', ['goal' => $goal]));
     }
 
     /**
