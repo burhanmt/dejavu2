@@ -7,7 +7,7 @@ return [
                 [
                     'type' => 'trust-level-translations', //route name
                     'method' => 'trustLevelTranslations', //relationship method name
-                    'model' => 'trust_level' // modal name but snake case
+                    'model' => 'trust_level' // model name but snake case
                 ]
             ]
         ],
@@ -16,7 +16,7 @@ return [
                 [
                     'type'   => 'part-of-speech-translations', //route name
                     'method' => 'partOfSpeechTranslations', //relationship method name
-                    'model'  => 'part_of_speech' // modal name but snake case
+                    'model'  => 'part_of_speech' // model name but snake case
                 ]
             ]
         ],
@@ -25,7 +25,7 @@ return [
                 [
                     'type'   => 'memory-level-translations', //route name
                     'method' => 'memoryLevelTranslations', //relationship method name
-                    'model'  => 'memory_level' // modal name but snake case
+                    'model'  => 'memory_level' // model name but snake case
                 ]
             ]
         ],
@@ -34,7 +34,7 @@ return [
                 [
                     'type'   => 'goal-translations', //route name
                     'method' => 'goalTranslations', //relationship method name
-                    'model'  => 'goal' // modal name but snake case
+                    'model'  => 'goal' // model name but snake case
                 ]
             ]
         ],
@@ -43,7 +43,7 @@ return [
                 [
                     'type'   => 'interest-translations', //route name
                     'method' => 'interestTranslations', //relationship method name
-                    'model'  => 'interest' // modal name but snake case
+                    'model'  => 'interest' // model name but snake case
                 ]
             ]
         ],
@@ -52,7 +52,25 @@ return [
                 [
                     'type' => 'users', //route name
                     'method' => 'users', //relationship method name
-                    'model' => 'dejavu_client' // modal name but snake case
+                    'model' => 'dejavu_client' // model name but snake case
+                ]
+            ]
+        ],
+        'users' => [
+            'relationships' => [
+                [
+                    'type' => 'dejavu-clients', //route name
+                    'method' => 'dejavuClients', //relationship method name
+                    'model' => 'user' // model name but snake case
+                ]
+            ]
+        ],
+        'user-profiles' => [
+            'relationships' => [
+                [
+                    'type' => 'users', //route name
+                    'method' => 'user', //relationship method name
+                    'model' => 'user_profile' // model name but snake case
                 ]
             ]
         ],

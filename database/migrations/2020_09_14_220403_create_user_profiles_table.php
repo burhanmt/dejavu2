@@ -16,8 +16,8 @@ class CreateUserProfilesTable extends Migration
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedInteger('country_id');
-            $table->unsignedInteger('timezone_id');
+            $table->unsignedInteger('country_id')->nullable();
+            $table->unsignedInteger('timezone_id')->nullable();
             $table->date('birthday')->nullable();
             $table->timestamps();
         });

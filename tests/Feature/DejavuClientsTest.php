@@ -201,7 +201,7 @@ class DejavuClientsTest extends TestCase
 
     public function testRelatedLink()
     {
-        $user = User::factory()->make();
+        $user = User::factory()->create();
         Passport::actingAs($user);
         $this->getJson(self::ENDPOINT . '1/relationships/users', [
             'accept'       => 'application/vnd.api+json',
@@ -221,7 +221,7 @@ class DejavuClientsTest extends TestCase
 
     public function testSelfLink()
     {
-        $user = User::factory()->make();
+        $user = User::factory()->create();
         Passport::actingAs($user);
         $this->getJson(
             self::ENDPOINT . '1/users',
@@ -238,9 +238,15 @@ class DejavuClientsTest extends TestCase
                             'type' => 'users',
                             'attributes' => [
                                 'uuid' => 'ca2e3750-0da5-11eb-8d8c-1f5f833dd7a2',
-                                'name' => 'Dejavu',
-                                'family_name' => 'English',
-                                'email' => 'burhanmt@outlook.com'
+                                'name' => $user->name,
+                                'family_name' => $user->family_name,
+                                'email' => $user->email,
+                                'email_verified_at' => $user->email_verified_at->format('Y-m-d H:i:s'),
+                                'role' => $user->role,
+                                'timezone' => $user->timezone,
+                                'created_at' => $user->created_at->toJson(),
+                                'updated_at' => $user->updated_at->toJson(),
+                                'dejavu_client_id' => $user->dejavu_client_id
 
                             ]
                         ]

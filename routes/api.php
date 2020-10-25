@@ -112,4 +112,19 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
         'dejavu-clients/{dejavu_client}/users',
         'DejavuClientsUsersRelatedController@index'
     )->name('dejavu-clients.users');
+
+    // Users
+    // todo-missing: DejavuClient Relationship is missing.
+    Route::apiResource(
+        'users',
+        'UsersController'
+    );
+    Route::get(
+        'users/{user}/relationships/dejavu-clients',
+        'UsersDejavuClientsRelationshipsController@index'
+    )->name('users.relationships.dejavu-clients');
+    Route::get(
+        'users/{user}/dejavu-clients',
+        'UsersDejavuClientsRelatedController@index'
+    )->name('users.dejavu-clients');
 });

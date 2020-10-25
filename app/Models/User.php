@@ -91,4 +91,13 @@ class User extends Authenticatable
                 ]
             );
     }
+
+    /**
+     * Relationship
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function dejavuClients()
+    {
+        return $this->hasMany(DejavuClient::class, 'id', 'dejavu_client_id');
+    }
 }

@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class UserProfile extends Model
+class UserProfile extends AbstractApiModel
 {
     use HasFactory;
 
@@ -15,4 +14,29 @@ class UserProfile extends Model
         'timezone_id',
         'birthday'
     ];
+
+    /**
+     * "type" name convention method. It is based on route name.
+     *
+     * @return false|string
+     */
+    public static function typeNameConvention()
+    {
+        return 'user-profiles';
+    }
+
+    /**
+     * It is mandatory field for JSON:API specification, therefore I use route name as type.
+     *
+     * @return false|string
+     */
+    public function type()
+    {
+        return self::typeNameConvention();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

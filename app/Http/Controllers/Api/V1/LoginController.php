@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\UserProfile;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -35,6 +36,11 @@ class LoginController extends Controller
             ]);
 
             $result = json_decode((string) $response->getBody(), true);
+            UserProfile::create(
+                [
+                    'user_id' => 1,
+                ]
+            );
         } else {
             $result = response()->json(
                 [
