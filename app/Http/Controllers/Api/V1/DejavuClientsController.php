@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateDejavuClientRequest;
 use App\Http\Requests\UpdateDejavuClientRequest;
@@ -13,6 +14,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class DejavuClientsController extends Controller
 {
+    use JsonApiResourceTraitHelper;
 
     /**
      * DejavuClientsController constructor.
@@ -51,17 +53,11 @@ class DejavuClientsController extends Controller
      */
     public function store(CreateDejavuClientRequest $request)
     {
-        $dejavuClient = DejavuClient::create(
-            [
-                'client_name' => $request->input('data.attributes.client_name'),
-                'client_domain_name' => $request->input('data.attributes.client_domain_name'),
-                'enabled' => $request->input('data.attributes.enabled'),
-            ]
+        return $this->createResource(
+            DejavuClient::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($dejavuClient))
-            ->response()
-            ->header('Location', route('dejavu-clients.show', ['dejavu_client' => $dejavuClient]));
     }
 
     /**

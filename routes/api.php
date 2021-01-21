@@ -127,4 +127,16 @@ Route::namespace('\App\Http\Controllers\Api\V1')->middleware('auth:api')->prefix
         'users/{user}/dejavu-clients',
         'UsersDejavuClientsRelatedController@index'
     )->name('users.dejavu-clients');
+
+    //UserProfile
+    Route::apiResource(
+        'user-profiles',
+        'UserProfilesController'
+    );
+
+    //UserLearningProfile
+    Route::apiResource(
+        'user-learning-profiles',
+        'UserLearningProfilesController'
+    );
 });

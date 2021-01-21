@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateTrustLevelRequest;
 use App\Http\Requests\UpdateTrustLevelRequest;
@@ -13,6 +14,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class TrustLevelsController extends Controller
 {
+    use JsonApiResourceTraitHelper;
+
     /**
      * TrustLevelsController constructor.
      */
@@ -48,15 +51,11 @@ class TrustLevelsController extends Controller
      */
     public function store(CreateTrustLevelRequest $request)
     {
-        $trustLevel = TrustLevel::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-            ]
+        return $this->createResource(
+            TrustLevel::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($trustLevel))
-            ->response()
-            ->header('Location', route('trust-levels.show', ['trust_level' => $trustLevel ]));
     }
 
     /**

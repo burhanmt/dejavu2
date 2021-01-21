@@ -3,9 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class UserLearningProfile extends Model
+
+class UserLearningProfile extends AbstractApiModel
 {
     use HasFactory;
 
@@ -14,4 +14,29 @@ class UserLearningProfile extends Model
         'vocabulary_retention',
         'cefr_level'
     ];
+
+    /**
+     * "type" name convention method. It is based on route name.
+     *
+     * @return false|string
+     */
+    public static function typeNameConvention()
+    {
+        return 'user-learning-profiles';
+    }
+
+    /**
+     * It is mandatory field for JSON:API specification, therefore I use route name as type.
+     *
+     * @return false|string
+     */
+    public function type()
+    {
+        return self::typeNameConvention();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

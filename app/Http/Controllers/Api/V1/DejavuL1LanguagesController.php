@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateDejavuL1LanguageRequest;
 use App\Http\Requests\UpdateDejavuL1LanguageRequest;
@@ -13,6 +14,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class DejavuL1LanguagesController extends Controller
 {
+    use JsonApiResourceTraitHelper;
+
     /**
      * DejavuL1LanguagesController constructor.
      */
@@ -49,17 +52,11 @@ class DejavuL1LanguagesController extends Controller
      */
     public function store(CreateDejavuL1LanguageRequest $request)
     {
-        $dejavuL1Language = DejavuL1Language::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-                'short_name' => $request->input('data.attributes.short_name'),
-                'interface_language_support' => $request->input('data.attributes.interface_language_support')
-            ]
+        return $this->createResource(
+            DejavuL1Language::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($dejavuL1Language))
-            ->response()
-            ->header('Location', route('dejavu-l1-languages.show', ['dejavu_l1_language' => $dejavuL1Language ]));
     }
 
     /**

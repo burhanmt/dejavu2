@@ -41,7 +41,7 @@ class UserProfilePolicy
      */
     public function create(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -53,7 +53,7 @@ class UserProfilePolicy
      */
     public function update(User $user, UserProfile $userProfile)
     {
-        //
+        return $user->isPlatformAdmins() || ($userProfile->id === $user->id);
     }
 
     /**
@@ -65,7 +65,7 @@ class UserProfilePolicy
      */
     public function delete(User $user, UserProfile $userProfile)
     {
-        //
+        return false;
     }
 
     /**
@@ -77,7 +77,7 @@ class UserProfilePolicy
      */
     public function restore(User $user, UserProfile $userProfile)
     {
-        //
+        return false;
     }
 
     /**
@@ -89,6 +89,6 @@ class UserProfilePolicy
      */
     public function forceDelete(User $user, UserProfile $userProfile)
     {
-        //
+        return false;
     }
 }

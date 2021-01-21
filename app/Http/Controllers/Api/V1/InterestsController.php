@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateInterestRequest;
 use App\Http\Requests\UpdateInterestRequest;
@@ -13,6 +14,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class InterestsController extends Controller
 {
+    use JsonApiResourceTraitHelper;
 
     /**
      * InterestsController constructor.
@@ -54,16 +56,11 @@ class InterestsController extends Controller
      */
     public function store(CreateInterestRequest $request)
     {
-        $interest = Interest::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-                'description' => $request->input('data.attributes.description'),
-            ]
+        return $this->createResource(
+            Interest::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($interest))
-            ->response()
-            ->header('Location', route('interests.show', ['interest' => $interest]));
     }
 
     /**

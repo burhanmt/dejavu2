@@ -2,17 +2,31 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateUserProfileRequest;
 use App\Http\Requests\UpdateUserProfileRequest;
 use App\Http\Resources\JsonApiCollection;
 use App\Http\Resources\JsonApiResource;
 use App\Models\UserProfile;
-use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class UserProfilesController extends Controller
 {
+    use JsonApiResourceTraitHelper;
+
+    /**
+     * TrustLevelsController constructor.
+     */
+    public function __construct()
+    {
+        /**
+         * user_profile is router parameter representative like:
+         * api/v1/user-profile/{user_profile}
+         */
+        $this->authorizeResource(UserProfile::class, 'user_profile');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -42,18 +56,11 @@ class UserProfilesController extends Controller
      */
     public function store(CreateUserProfileRequest $request)
     {
-        $userProfile = UserProfile::create(
-            [
-                'user_id' => $request->input('data.attributes.user_id'),
-                'country_id' => $request->input('data.attributes.country_id'),
-                'timezone_id' => $request->input('data.attributes.timezone_id'),
-                'birthday' => $request->input('data.attributes.birthday'),
-            ]
+        return $this->createResource(
+            UserProfile::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($userProfile))
-            ->response()
-            ->header('Location', route('user-profiles.show', ['user_profile' => $userProfile]));
     }
 
     /**

@@ -1,6 +1,14 @@
 <?php
 
 
+/**
+ * //todo-improvement: "op"
+ * Unfortunately JSON:API spec does not support creation of multiple resources with one request yet. So you would need
+ * to create the cart and it’s cart-items with separate requests. This limitation should be solved by a new feature
+ * called operations 112, which is proposed for v1.2.
+ * Ref: https://github.com/json-api/json-api/pull/1254
+ * 
+ */
 namespace App\Helpers;
 
 

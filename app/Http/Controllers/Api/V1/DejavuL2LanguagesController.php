@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateDejavuL2LanguageRequest;
 use App\Http\Requests\UpdateDejavuL2LanguageRequest;
@@ -12,6 +13,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class DejavuL2LanguagesController extends Controller
 {
+    use JsonApiResourceTraitHelper;
+
     /**
      * DejavuL2LanguagesController constructor.
      */
@@ -47,16 +50,11 @@ class DejavuL2LanguagesController extends Controller
      */
     public function store(CreateDejavuL2LanguageRequest $request)
     {
-        $dejavuL2Language = DejavuL2Language::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-                'short_name' => $request->input('data.attributes.short_name')
-            ]
+        return $this->createResource(
+            DejavuL2Language::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($dejavuL2Language))
-            ->response()
-            ->header('Location', route('dejavu-l2-languages.show', ['dejavu_l2_language' => $dejavuL2Language ]));
     }
 
     /**

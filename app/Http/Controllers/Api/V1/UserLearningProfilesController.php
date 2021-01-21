@@ -2,12 +2,32 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateUserLearningProfileRequest;
+use App\Http\Requests\UpdateUserLearningProfileRequest;
+use App\Http\Resources\JsonApiCollection;
+use App\Http\Resources\JsonApiResource;
 use App\Models\UserLearningProfile;
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class UserLearningProfilesController extends Controller
 {
+    use JsonApiResourceTraitHelper;
+
+    /**
+     * UserLearningProfilesController constructor.
+     */
+    public function __construct()
+    {
+        /**
+         * user_learning_profile is router parameter representative like:
+         * api/v1/user-learning-profiles/{user_learning_profile}
+         */
+        $this->authorizeResource(UserLearningProfile::class, 'user_learning_profile');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,18 +35,32 @@ class UserLearningProfilesController extends Controller
      */
     public function index()
     {
-        //
+        $userLearningProfiles = QueryBuilder::for(TrustLevel::class)
+            ->allowedSorts(
+                [
+                    'vocabulary_retention',
+                    'cefr_level',
+                    'created_at',
+                    'updated_at'
+                ]
+            )->allowedIncludes(['user'])
+            ->jsonPaginate();
+
+        return new JsonApiCollection($userLearningProfiles);
     }
 
+
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param CreateUserLearningProfileRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(CreateUserLearningProfileRequest $request)
     {
-        //
+        return $this->createResource(
+            UserLearningProfile::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
+        );
     }
 
     /**
@@ -37,19 +71,23 @@ class UserLearningProfilesController extends Controller
      */
     public function show(UserLearningProfile $userLearningProfile)
     {
-        //
+        $query = QueryBuilder::for(UserLearningProfile::where('id', $userLearningProfile->id))
+            ->allowedIncludes('user')
+            ->firstOrFail();
+
+        return (new JsonApiResource($query));
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\UserLearningProfile  $userLearningProfile
-     * @return \Illuminate\Http\Response
+     * @param UpdateUserLearningProfileRequest $request
+     * @param UserLearningProfile $userLearningProfile
+     * @return JsonApiResource
      */
-    public function update(Request $request, UserLearningProfile $userLearningProfile)
+    public function update(UpdateUserLearningProfileRequest $request, UserLearningProfile $userLearningProfile)
     {
-        //
+        $userLearningProfile->update($request->input('data.attributes'));
+
+        return new JsonApiResource($userLearningProfile);
     }
 
     /**
@@ -60,6 +98,8 @@ class UserLearningProfilesController extends Controller
      */
     public function destroy(UserLearningProfile $userLearningProfile)
     {
-        //
+        $userLearningProfile->delete();
+
+        return response(null, 204);
     }
 }

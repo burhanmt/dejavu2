@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateMemoryLevelRequest;
 use App\Http\Requests\UpdateMemoryLevelRequest;
@@ -12,6 +13,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class MemoryLevelsController extends Controller
 {
+    use JsonApiResourceTraitHelper;
+
     /**
      * MemoryLevelsController constructor.
      */
@@ -47,16 +50,11 @@ class MemoryLevelsController extends Controller
      */
     public function store(CreateMemoryLevelRequest $request)
     {
-        $memoryLevel = MemoryLevel::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-                'description' => $request->input('data.attributes.description'),
-            ]
+        return $this->createResource(
+            MemoryLevel::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($memoryLevel))
-            ->response()
-            ->header('Location', route('memory-levels.show', ['memory_level' => $memoryLevel]));
     }
 
     /**

@@ -168,6 +168,11 @@ return [
 
 ### 6. Now It is the time to prepare the controller (_Controllers/Api/V1/TrustLevelsController.php_) for JSON:API specification like below:
 
+Do not forget this trait to the controller class.
+```
+    use JsonApiResourceTraitHelper;
+```
+
 ```
 <?php
 
@@ -209,15 +214,11 @@ class TrustLevelsController extends Controller
      */
     public function store(CreateTrustLevelRequest $request)
     {
-        $trustLevel = TrustLevel::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-            ]
+        return $this->createResource(
+            TrustLevel::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($trustLevel))
-            ->response()
-            ->header('Location', route('trust-levels.show', ['trust_level' => $trustLevel ]));
     }
 
     /**

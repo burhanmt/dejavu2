@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Helpers\JsonApiResourceTraitHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreatePartOfSpeechRequest;
 use App\Http\Requests\UpdatePartOfSpeechRequest;
@@ -12,6 +13,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class PartOfSpeechesController extends Controller
 {
+    use JsonApiResourceTraitHelper;
 
     public function index()
     {
@@ -35,16 +37,11 @@ class PartOfSpeechesController extends Controller
      */
     public function store(CreatePartOfSpeechRequest $request)
     {
-        $partOfSpeech = PartOfSpeech::create(
-            [
-                'name' => $request->input('data.attributes.name'),
-                'short_name' => $request->input('data.attributes.short_name'),
-            ]
+        return $this->createResource(
+            PartOfSpeech::class,
+            $request->input('data.attributes'),
+            $request->input('data.relationships'),
         );
-
-        return (new JsonApiResource($partOfSpeech))
-            ->response()
-            ->header('Location', route('part-of-speeches.show', ['part_of_speech' => $partOfSpeech]));
     }
 
     /**

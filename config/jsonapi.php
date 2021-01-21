@@ -74,5 +74,14 @@ return [
                 ]
             ]
         ],
+        'user-learning-profiles' => [
+            'relationships' => [
+                [
+                    'type' => 'users', //route name
+                    'method' => 'user', //relationship method name
+                    'model' => 'user_learning_profile' // model name but snake case
+                ]
+            ]
+        ],
     ]
 ];
